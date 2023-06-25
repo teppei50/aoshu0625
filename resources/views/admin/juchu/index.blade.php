@@ -47,24 +47,22 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($juchus as $juchu)
-                            <tr>
-                                <td class="border px-4 py-2 text-center">{{ $juchu->id }}</td> 
-                                <td class="border px-4 py-2 text-center">{{ $juchu->kyakusaki_name }}</td>
-                                <td class="border px-4 py-2 text-center">{{ $juchu->item_name }}</td>
-                                <td class="border px-4 py-2 text-center">{{ $juchu->kosu }}</td>
-                                <td class="border px-4 py-2 text-center">{{ $juchu->joutai }}</td>
-                                <td class="border px-4 py-2 text-center">
-                                    @auth
-                                        <a href="{{ route('admin.juchu.edit',$juchu->id) }}" class="px-4 py-2 bg-blue-500 text-white rounded">変更</a>
-                                    @endauth
+                        @foreach ($juchus as $juchu)
+                    <tr>
+                        <td class="border px-4 py-2 text-center">{{ $juchu->id }}</td> 
+                        <td class="border px-4 py-2 text-center">{{ $juchu->kyakusaki_name }}</td>
+                        <td class="border px-4 py-2 text-center">{{ $juchu->item_name }}</td>
+                        <td class="border px-4 py-2 text-center">{{ $juchu->kosu }}</td>
+                        <td class="border px-4 py-2 text-center">{{ $juchu->joutai_name }}</td>
+                        <td class="border px-4 py-2 text-center">
+                            <a href="{{ route('admin.juchu.edit', $juchu->id) }}" class="px-4 py-2 bg-blue-500 text-white rounded">変更</a>
                                 </td>
                                 <td class="border px-4 py-2 text-center">
                                     @auth
                                         <form action="{{ route('admin.juchu.destroy',$juchu->id) }}" method="POST">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="px-4 py-2 bg-red-500 text-white rounded" onclick="return confirm('削除しますか？');">削除</button>
+                                            <button type="submit" class="px-4 py-2 bg-red-500 text-white rounded" onclick="return confirm('本当に削除しますか？')">削除</button>    
                                         </form>
                                     @endauth
                                 </td>

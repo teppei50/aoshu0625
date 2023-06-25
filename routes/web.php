@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController as ProfileOfAdminController;
+use App\Http\Controllers\PdfController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -15,7 +16,7 @@ use App\Http\Controllers\ProfileController as ProfileOfAdminController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
 });
 
 Route::get('/dashboard', function () {
@@ -53,7 +54,7 @@ Route::get('/items/edit/{item}', 'App\Http\Controllers\ItemController@edit')->na
 Route::put('/items/edit/{item}', 'App\Http\Controllers\ItemController@update')->name('item.update')->middleware('auth');;
 
 Route::get('/items/show/{item}', 'App\Http\Controllers\ItemController@show')->name('item.show');
-
+Route::get('/items/{id}/pdf', [PdfController::class, 'createPdf'])->name('items.pdf');
 Route::middleware('auth:admin')->group(function () {
     Route::delete('/items/{item}', 'App\Http\Controllers\ItemController@destroy')->name('item.destroy');
 });
@@ -93,3 +94,4 @@ Route::prefix('admin')->middleware('auth:admin')->group(function () {
     Route::get('/juchus/show/{juchu}', 'App\Http\Controllers\Admin\JuchuController@show')->name('admin.juchu.show');
     Route::delete('/juchus/{juchu}', 'App\Http\Controllers\Admin\JuchuController@destroy')->name('admin.juchu.destroy');
 });
+

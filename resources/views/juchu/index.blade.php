@@ -33,7 +33,7 @@
                 </div>
 
                 <div class="overflow-x-auto">
-                    <table class="min-w-full table-auto border-collapse">
+                    <table class="min-w-full table-auto">
                         <thead>
                             <tr>
                                 <th class="border px-4 py-2">{{ __('ID') }}</th>
@@ -42,8 +42,7 @@
                                 <th class="border px-4 py-2">{{ __('個数') }}</th>
                                 <th class="border px-4 py-2">{{ __('状態') }}</th>
                                 @auth<th class="border px-4 py-2">{{ __('変更') }}</th>@endauth
-                                @auth<th class="border px-4 py-2">{{ __('削除') }}</th>@endauth
-                                <th class="border px-4 py-2">{{ __('編集者') }}</th>
+                              
                             </tr>
                         </thead>
                         <tbody>
@@ -59,23 +58,26 @@
                                         <a href="{{ route('juchu.edit',$juchu->id) }}" class="px-4 py-2 bg-blue-500 text-white rounded">変更</a>
                                     @endauth
                                 </td>
-                                <td class="border px-4 py-2 text-center">
-                                    @auth
-                                        <form action="{{ route('juchu.destroy',$juchu->id) }}" method="POST">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="px-4 py-2 bg-red-500 text-white rounded" onclick="return confirm('削除しますか？');">削除</button>
-                                        </form>
-                                    @endauth
-                                </td>
-                                <td class="border px-4 py-2 text-center">{{ $juchu->user_name}}</td>
-                            </tr>
-                        @endforeach
+                            @endforeach
+                        </tbody>
                     </table>
+                    <div class="p-6">
+                <div class="flex justify-between items-center">
+                <div class="text-sm">
+                    @if ($juchus->currentPage() == 1)
+                        {{ $juchus->firstItem() }} {{ __('to') }} {{ $juchus->perPage() < $juchus->total() ? $juchus->perPage() : $juchus->total() }}
+                    @else
+                    {{ __('Showing') }} {{ $juchus->firstItem() }} {{ __('to') }} {{ $juchus->lastItem() }}
+                    @endif
+                        {{ __('of') }} {{ $juchus->total() }} {{ __('results') }}
                 </div>
-            
-                {!! $juchus->links('pagination::bootstrap-5') !!}
+                    <div class="flex items-center">
+                    {!! $juchus->previousPageUrl() ? '<a href="' . $juchus->previousPageUrl() . '" class="px-3 py-1 bg-gray-200 text-gray-600 rounded" aria-label="Previous">&lsaquo;</a>' : '' !!}
+                    @foreach ($juchus->getUrlRange($juchus->currentPage() - 1, $juchus->currentPage() + 1) as $page => $url)
+                        <a href="{{ $url }}" class="px-3 py-1 bg-gray-200 text-gray-600 rounded @if ($page == $juchus->currentPage()) font-semibold @endif">{{ $page }}</a>
+                    @endforeach
+                    {!! $juchus->nextPageUrl() ? '<a href="' . $juchus->nextPageUrl() . '" class="px-3 py-1 bg-gray-200 text-gray-600 rounded" aria-label="Next">&rsaquo;</a>' : '' !!}
+                </div>
             </div>
         </div>
-    </div>
 </x-app-layout>
