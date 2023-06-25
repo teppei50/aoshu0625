@@ -10,10 +10,10 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg p-6">
                 <div class="mb-4 text-right">
-                    <a href="{{ url('/juchus') }}" class="px-4 py-3 bg-green-500 text-white rounded">{{ __('戻る') }}</a>
+                <a href="{{ route('admin.juchu.index', ['page' => $page ?? 1]) }}" class="px-4 py-3 bg-green-500 text-white rounded">{{ __('戻る') }}</a>
                 </div>
 
-                <form action="{{ route('juchu.store') }}" method="POST">
+                <form action="{{ route('admin.juchu.store') }}" method="POST">
                     @csrf
 
                     <div class="grid grid-cols-1 gap-6">

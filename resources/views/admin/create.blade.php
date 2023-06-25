@@ -10,10 +10,10 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg p-6">
                 <div class="mb-4 text-right">
-                    <a href="{{ url('/items') }}" class="px-4 py-3 bg-green-500 text-white rounded">{{ __('戻る') }}</a>
+                <a href="{{ route('admin.item.index') }}" class="px-4 py-3 bg-green-500 text-white rounded">{{ __('戻る') }}</a>
                 </div>
 
-                <form action="{{ route('item.store') }}" method="POST">
+                <form action="{{ route('admin.item.store') }}" method="POST">
                     @csrf
 
                     <div class="grid grid-cols-1 gap-6">

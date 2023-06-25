@@ -74,28 +74,22 @@ Route::delete('/juchus/{juchu}', 'App\Http\Controllers\JuchuController@destroy')
 
 //admin用
 
-Route::get('/admin/items', 'App\Http\Controllers\ItemController@index')->name('admin.item.index');
+Route::prefix('admin')->middleware('auth:admin')->group(function () {
+    // ItemControllerのルート
+    Route::get('/items', 'App\Http\Controllers\Admin\ItemController@index')->name('admin.item.index');
+    Route::get('/items/create', 'App\Http\Controllers\Admin\ItemController@create')->name('admin.item.create');
+    Route::post('/items/store', 'App\Http\Controllers\Admin\ItemController@store')->name('admin.item.store');
+    Route::get('/items/edit/{item}', 'App\Http\Controllers\Admin\ItemController@edit')->name('admin.item.edit');
+    Route::put('/items/edit/{item}', 'App\Http\Controllers\Admin\ItemController@update')->name('admin.item.update');
+    Route::get('/items/show/{item}', 'App\Http\Controllers\Admin\ItemController@show')->name('admin.item.show');
+    Route::delete('/items/{item}', 'App\Http\Controllers\Admin\ItemController@destroy')->name('admin.item.destroy');
 
-Route::get('/admin/items/create', 'App\Http\Controllers\ItemController@create')->name('admin.item.create');
-Route::post('/admin/items/store', 'App\Http\Controllers\ItemController@store')->name('admin.item.store');
-
-Route::get('/admin/items/edit/{item}', 'App\Http\Controllers\ItemController@edit')->name('admin.item.edit');
-Route::put('/admin/items/edit/{item}', 'App\Http\Controllers\ItemController@update')->name('admin.item.update');
-
-Route::get('/admin/items/show/{item}', 'App\Http\Controllers\ItemController@show')->name('admin.item.show');
-
-Route::delete('/admin/juchus/{juchu}', 'App\Http\Controllers\JuchuController@destroy')->name('admin.juchu.destroy');
-    
-
-Route::get('/admin/juchus', 'App\Http\Controllers\JuchuController@index')->name('admin.juchu.index');  
-
-Route::get('/admin/juchus/create', 'App\Http\Controllers\JuchuController@create')->name('admin.juchu.create');
-Route::post('/admin/juchus/store', 'App\Http\Controllers\JuchuController@store')->name('admin.juchu.store');
-
-Route::get('/admin/juchus/edit/{juchu}', 'App\Http\Controllers\JuchuController@edit')->name('admin.juchu.edit');
-Route::put('/admin/juchus/edit/{juchu}', 'App\Http\Controllers\JuchuController@update')->name('admin.juchu.update');
-
-Route::get('admin/juchus/show/{juchu}', 'App\Http\Controllers\JuchuController@show')->name('admin.juchu.show');
-
-Route::delete('/admin/juchus/{juchu}', 'App\Http\Controllers\JuchuController@destroy')->name('admin.juchu.destroy');
-
+    // JuchuControllerのルート
+    Route::get('/juchus', 'App\Http\Controllers\Admin\JuchuController@index')->name('admin.juchu.index');
+    Route::get('/juchus/create', 'App\Http\Controllers\Admin\JuchuController@create')->name('admin.juchu.create');
+    Route::post('/juchus/store', 'App\Http\Controllers\Admin\JuchuController@store')->name('admin.juchu.store');
+    Route::get('/juchus/edit/{juchu}', 'App\Http\Controllers\Admin\JuchuController@edit')->name('admin.juchu.edit');
+    Route::put('/juchus/edit/{juchu}', 'App\Http\Controllers\Admin\JuchuController@update')->name('admin.juchu.update');
+    Route::get('/juchus/show/{juchu}', 'App\Http\Controllers\Admin\JuchuController@show')->name('admin.juchu.show');
+    Route::delete('/juchus/{juchu}', 'App\Http\Controllers\Admin\JuchuController@destroy')->name('admin.juchu.destroy');
+});

@@ -12,8 +12,8 @@
                     <div class="text-left">
                         <h2 class="text-base font-semibold">{{ __('商品詳細') }}</h2>
                     </div>
-                    <div class="text-right mx-3">
-                        <a href="{{ url('/items') }}?page={{ $page }}" class="px-3 py-5 bg-green-500 text-white rounded">{{ __('戻る') }}</a>
+                    <div class="text-right mx-3">]
+                    <a href="{{ route('admin.item.index') }}?page={{ $page }}" class="px-4 py-3 bg-green-500 text-white rounded">{{ __('戻る') }}</a>
                     </div>
                 </div>
                 <div class="flex justify-center">

@@ -11,13 +11,13 @@
                 <div class="row">
                     <div class="col-lg-12 margin-tb">
                         <div class="flex justify-end mb-4 ml-4">
-                            <a href="{{ url('/juchus') }}" class="px-6 py-4 bg-green-500 text-white rounded">{{ __('戻る') }}</a>
+                        <a href="{{ route('admin.juchu.index') }}?page={{ $page }}" class="px-4 py-3 bg-green-500 text-white rounded">{{ __('戻る') }}</a>
                         </div>
                     </div>
                 </div>
     
                 <div class="my-4 mx-auto max-w-2xl">
-                    <form action="{{ route('juchu.update', ['juchu' => $juchu->id]) }}" method="POST">
+                    <form action="{{ route('admin.juchu.update', ['juchu' => $juchu->id]) }}" method="POST">
                         @method('PUT')
                         @csrf
                          

@@ -11,7 +11,7 @@
                 <div class="p-2">
                     <div class="text-right">
                         @auth
-                        <a href="{{ route('item.create') }}" class="px-2 py-4 bg-green-500 text-white rounded">{{ __('新規登録') }}</a>
+                        <a href="{{ route('admin.item.create') }}" class="px-2 py-4 bg-green-500 text-white rounded">{{ __('新規登録') }}</a>
                         @endauth
                     </div>
                 </div>
@@ -49,21 +49,21 @@
                             <tr>
                                 <td class="border px-4 py-2 text-center">{{ $item->id }}</td>
                                 <td class="border px-4 py-2">
-                                    <a href="{{ route('item.show', $item->id) }}?page={{ $page }}">{{ $item->name }}</a>
+                                    <a href="{{ route('admin.item.show', $item->id) }}?page={{ $page }}">{{ $item->name }}</a>
                                 </td>
                                 <td class="border px-4 py-2 text-center">{{ $item->kakaku }}円</td>
                                 <td class="border px-4 py-2 text-center">{{ $item->bunrui }}</td>
                                 @auth
                                 <td class="border px-4 py-2 text-center">
-                                    <a href="{{ route('item.edit', $item->id) }}" class="px-4 py-2 bg-blue-500 text-white rounded">{{ __('変更') }}</a>
+                                    <a href="{{ route('admin.item.edit', $item->id) }}" class="px-4 py-2 bg-blue-500 text-white rounded">{{ __('変更') }}</a>
                                 </td>
                                 @endauth
                                 @auth('admin')
                                 <td class="border px-4 py-2 text-center">
-                                    <form action="{{ route('item.destroy', $item->id) }}" method="POST">
+                                    <form action="{{ route('admin.item.destroy', $item->id) }}" method="POST">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('削除しますか？');">{{ __('削除') }}</button>
+                                        <button type="submit" class="px-4 py-2 bg-red-500 text-white rounded" onclick="return confirm('削除しますか？');">{{ __('削除') }}</button>
                                     </form>
                                 </td>
                                 @endauth

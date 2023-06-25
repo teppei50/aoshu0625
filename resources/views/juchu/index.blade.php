@@ -11,7 +11,7 @@
                 <div class="p-2">
                     <div class="text-right">
                         @auth
-                            <a href="{{ route('item.create') }}" class="px-2 py-4 bg-green-500 text-white rounded">{{ __('新規登録') }}</a>
+                            <a href="{{ route('juchu.create') }}" class="px-2 py-4 bg-green-500 text-white rounded">{{ __('新規登録') }}</a>
                         @endauth
                     </div>
                 </div>
